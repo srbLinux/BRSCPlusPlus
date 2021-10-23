@@ -9,6 +9,8 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QMessageBox>
+#include <QErrorMessage>
 #include <QtSql/QSqlDatabase>
 
 class Login : public QWidget
@@ -26,6 +28,7 @@ private:
     QPushButton* RegisterBtn;
     QGridLayout* LoginLayout;
 public slots:
+    void ReStart();
     void LoginCheck();
     void RegisterClicked();
 signals:

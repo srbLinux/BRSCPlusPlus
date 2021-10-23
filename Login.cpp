@@ -23,8 +23,15 @@ Login::Login(QWidget *parent) : QWidget(parent)
     ReStartBtn = new QPushButton;
     ReStartBtn->setText(tr("重置输入"));
     LoginLayout->addWidget(ReStartBtn,2,2);
+    connect(ReStartBtn,&QPushButton::clicked,this,&Login::ReStart);
     connect(CheckBtn,&QPushButton::clicked,this,&Login::LoginCheck);
     connect(RegisterBtn,&QPushButton::clicked,this,&Login::RegisterClicked);
+}
+
+void Login::ReStart()
+{
+    UserAccountLine->clear();
+    UserPasswordLine->clear();
 }
 
 void Login::RegisterClicked()
@@ -33,7 +40,18 @@ void Login::RegisterClicked()
     regWin->show();
 }
 
+//no finish
 void Login::LoginCheck()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setUserName("root");
+    db.setHostName("localhost");
+    db.setPort(3306);
+    db.setDatabaseName("BRSCPlusPlus");
+    db.setPassword("123");
+    bool DBOpen = db.open();
+    if(DBOpen == true)
+    {
+
+    }
 }
