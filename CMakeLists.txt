@@ -13,6 +13,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Sql REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql REQUIRED)
+find_package(usr/local/lib)
+find_package(usr/local/boost/lib)
+
+include_directories(/usr/include/boost/include)
+include_directories(/usr/include/python2.7)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -22,6 +27,14 @@ set(PROJECT_SOURCES
         Login.cpp
         Register.h
         Register.cpp
+        Basefunction.h
+        Basefunction.cpp
+        Newfolder.h
+        Newfolder.cpp
+        mos/include/JavaInLine.h
+        mos/include/PythonInLine.h
+        mos/src/JavaInLine.cpp
+        mos/src/PythonInLine.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
