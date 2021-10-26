@@ -1,5 +1,6 @@
 #include "Register.h"
 
+
 Register::Register(QWidget *parent) : QWidget(parent)
 {
     setWindowTitle(tr("BRSC++ 注册页面"));
@@ -51,6 +52,15 @@ Register::Register(QWidget *parent) : QWidget(parent)
     RegisterMainLayout->addWidget(UserPasswordAgainLabel,6,0);
     UserPasswordAgainLine = new QLineEdit;
     RegisterMainLayout->addWidget(UserPasswordAgainLine,6,1);
+    GetInfoCheckBox = new QCheckBox;
+    GetInfoCheckBox->setText("记住注册信息");
+    NoGetInfoCheckBox = new QCheckBox;
+    NoGetInfoCheckBox->setText("不记住注册信息");
+    QButtonGroup* InfoGroup = new QButtonGroup(this);
+    RegisterMainLayout->addWidget(GetInfoCheckBox,7,0);
+    RegisterMainLayout->addWidget(NoGetInfoCheckBox,7,1);
+    InfoGroup->addButton(GetInfoCheckBox,1);
+    InfoGroup->addButton(NoGetInfoCheckBox,2);
     /*
         All QPushButton is there!!!
         The Plan is:
@@ -60,7 +70,7 @@ Register::Register(QWidget *parent) : QWidget(parent)
         now coding it !!!
     */
     RegisterABtnLayout = new QHBoxLayout;
-    RegisterMainLayout->addLayout(RegisterABtnLayout,7,0,1,2);
+    RegisterMainLayout->addLayout(RegisterABtnLayout,8,0,1,2);
     RegisterCheckBtn = new QPushButton;
     RegisterCheckBtn->setText(tr("用户注册"));
     RegisterABtnLayout->addWidget(RegisterCheckBtn);
@@ -116,6 +126,16 @@ void Register::RegisterCheck()
             {
                 QMessageBox* msg = new QMessageBox;
                 msg->information(NULL,"","注册成功",QMessageBox::Yes | QMessageBox::No,QMessageBox::Yes);
+                if(GetInfoCheckBox->isChecked())
+                {
+                    QString UserPath = QCoreApplication::applicationDirPath();
+                    UserPath += "/UserInfo/Login.ini";
+                    UserInfoSetting = new QSettings(UserPath,QSettings::IniFormat);
+                    UserInfoSetting->beginGroup("LoginInfo");
+                    UserInfoSetting->setValue("Account",UserAccountLine->text());
+                    UserInfoSetting->setValue("Password",UserPasswordLine->text());
+                    UserInfoSetting->endGroup();
+                }
                 close();
             }
         }

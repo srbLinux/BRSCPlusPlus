@@ -1,0 +1,32 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "gcc_64",
+            "intelliSenseMode": "gcc-x64",
+            "includePath": [
+                "usr/include",
+                "opt/Qt/6.2.0/gcc_64/include",
+                "opt/Qt/6.2.0/gcc_64/include/QtCore",
+                "opt/Qt/6.2.0/gcc_64/include/QtGui",
+                "opt/Qt/6.2.0/gcc_64/include/QtWidgets",
+                "opt/Qt/6.2.0/gcc_64/include/QtSql",
+                "opt/Qt/6.2.0/gcc_64/include/QtNetwork"
+            ],
+            "browse": {
+                "path": [
+                    "opt/Qt/6.2.0/gcc_64/include",
+                    "opt/Qt/6.2.0/gcc_64/include/QtCore",
+                    "opt/Qt/6.2.0/gcc_64/include/QtGui",
+                    "opt/Qt/6.2.0/gcc_64/include/QtWidgets",
+                    "opt/Qt/6.2.0/gcc_64/include/QtSql",
+                    "opt/Qt/6.2.0/gcc_64/include/QtNetwork"
+                ]
+            },
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ]
+}

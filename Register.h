@@ -7,6 +7,7 @@
 #include <QWidget>
 #include <QCheckBox>
 #include <QLineEdit>
+#include <QSettings>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -15,6 +16,7 @@
 #include <QButtonGroup>
 #include <QSqlDatabase>
 #include <QErrorMessage>
+#include <QCoreApplication>
 
 class Register : public QWidget
 {
@@ -34,6 +36,9 @@ private:
     QLineEdit* UserPasswordAgainLine;
     QCheckBox* UserSexCheckBoxMan;
     QCheckBox* UserSexCheckBoxWoman;
+    QCheckBox* GetInfoCheckBox;
+    QCheckBox* NoGetInfoCheckBox;
+    QSettings* UserInfoSetting;
     QPushButton* UserSexCheckBtn;
     QPushButton* RegisterCheckBtn;
     QPushButton* RegisterReStartBtn;

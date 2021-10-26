@@ -7,10 +7,12 @@
 #include <QLabel>
 #include <QWidget>
 #include <QLineEdit>
+#include <QSettings>
 #include <QPushButton>
 #include <QGridLayout>
 #include <QMessageBox>
 #include <QErrorMessage>
+#include <QCoreApplication>
 #include <QtSql/QSqlDatabase>
 
 class Login : public QWidget
@@ -23,6 +25,7 @@ private:
     QLabel* UserPasswordLabel;
     QLineEdit* UserAccountLine;
     QLineEdit* UserPasswordLine;
+    QSettings* UserInfoSettings;
     QPushButton* CheckBtn;
     QPushButton* ReStartBtn;
     QPushButton* RegisterBtn;

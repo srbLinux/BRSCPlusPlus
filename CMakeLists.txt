@@ -35,6 +35,8 @@ set(PROJECT_SOURCES
         mos/include/PythonInLine.h
         mos/src/JavaInLine.cpp
         mos/src/PythonInLine.cpp
+        BRSWindow/Aboutbrs.h
+        BRSWindow/Aboutbrs.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

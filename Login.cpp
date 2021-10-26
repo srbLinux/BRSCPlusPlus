@@ -40,7 +40,7 @@ void Login::RegisterClicked()
     regWin->show();
 }
 
-//no finish
+
 void Login::LoginCheck()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
@@ -52,6 +52,22 @@ void Login::LoginCheck()
     bool DBOpen = db.open();
     if(DBOpen == true)
     {
-
+        QString Account = UserAccountLine->text();
+        QString Password = UserAccountLine->text();
+        QString sql = "select * from UserInfo where UserAccount=\"" + Account + "\" and UserPassword=\"" + Password +"\"";
+        QSqlQuery query;
+        bool queryean = false;
+        queryean = query.exec(sql);
+        if(queryean == true)
+        {
+            close();
+            QMessageBox* LoginBox = new QMessageBox;
+            LoginBox->information(NULL,"","登录成功",QMessageBox::Yes | QMessageBox::No,QMessageBox::Yes);
+        }
+        else
+        {
+            QMessageBox* Error = new QMessageBox;
+            Error->information(NULL,"","账号或者密码错误",QMessageBox::Yes | QMessageBox::No,QMessageBox::No);
+        }
     }
 }

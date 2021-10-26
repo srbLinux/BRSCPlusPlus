@@ -1,10 +1,12 @@
 #ifndef NEWFOLDER_H
 #define NEWFOLDER_H
 
+#include <QDir>
 #include <QLabel>
 #include <QWidget>
 #include <QLineEdit>
 #include <QGridLayout>
+#include <QHBoxLayout>
 #include <QPushButton>
 
 class NewFolder : public QWidget
@@ -18,9 +20,16 @@ private:
     QLabel* NewPathNameLabel;
     QLineEdit* NewPathNameLine;
     QGridLayout* NewLayout;
+    QHBoxLayout* BtnLayout;
+    QPushButton* OKBtn;
+    QPushButton* CancelBtn;
+    QPushButton* ReStartBtn;
 public slots:
-    void GetNameQString();
-    void GetPathQString();
+    void CancelWindow();
+    void ReStartWindow();
+    void OKWindow();
+    QString GetNameQString();
+    QString GetPathQString();
 signals:
 
 };
