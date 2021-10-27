@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 project(BRSCPlusPlus VERSION 0.1 LANGUAGES CXX)
 
+file(GLOB_RECURSE QRC_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/SourceFile/*.qrc)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
@@ -11,10 +13,16 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(QRC_SOURCE_FILES FilePicture.qrc)
+
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Sql REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql REQUIRED)
 find_package(usr/local/lib)
 find_package(usr/local/boost/lib)
+
+qt6_add_resources(QRC_FILES ${QRC_SOURCE_FILES})
+
+source_group("Resource Files" FILES ${QRC_SOURCE_FILES})
 
 include_directories(/usr/include/boost/include)
 include_directories(/usr/include/python2.7)
@@ -29,20 +37,25 @@ set(PROJECT_SOURCES
         Register.cpp
         Basefunction.h
         Basefunction.cpp
-        Newfolder.h
-        Newfolder.cpp
+        MainWindow/TopMenuWindow/Newfolder.h
+        MainWindow/TopMenuWindow/Newfolder.cpp
         mos/include/JavaInLine.h
         mos/include/PythonInLine.h
         mos/src/JavaInLine.cpp
         mos/src/PythonInLine.cpp
-        BRSWindow/Aboutbrs.h
-        BRSWindow/Aboutbrs.cpp
+        MainWindow/TopMenuWindow/Aboutbrs.h
+        MainWindow/TopMenuWindow/Aboutbrs.cpp
+        MainWindow/TopMenuWindow/Openfloder.h
+        MainWindow/TopMenuWindow/Openfloder.cpp
+        MainWindow/TopMenuWindow/Newfile.h
+        MainWindow/TopMenuWindow/Newfile.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(BRSCPlusPlus
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        ${QRC_FIFES}
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET BRSCPlusPlus APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

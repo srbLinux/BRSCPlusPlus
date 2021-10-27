@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/image">
         <file>1324700-20180530175202679-365999987.png</file>
+        <file>QTSTART</file>
+        <file>Starting.jpg</file>
     </qresource>
 </RCC>

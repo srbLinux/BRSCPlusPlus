@@ -45,20 +45,26 @@ MainWindow::MainWindow(QWidget *parent)
      * Top Menu
     */
     FileMenu = new QMenu(tr("文件"));
-    OpenFileAction = new QAction(tr("打开文件"),FileMenu);
-    OpenFileAction->setShortcut(QKeySequence::Open);
-    OpenFileAction->setStatusTip(tr("Open a File"));
-    connect(OpenFileAction,&QAction::triggered,this,&MainWindow::OpenFileClicked);
-    OpenFolderAction = new QAction(tr("打开文件夹"),FileMenu);
-    connect(OpenFolderAction,&QAction::triggered,this,&MainWindow::OpenFolderClicked);
-    NewFileAction = new QAction(tr("新建文件"),FileMenu);
-    connect(NewFileAction,&QAction::triggered,this,&MainWindow::NewFileClicked);
-    NewFolderAction = new QAction(tr("新建文件夹"),FileMenu);
-    connect(NewFolderAction,&QAction::triggered,this,&MainWindow::NewFolderClicked);
-    FileMenu->addAction(OpenFileAction);
-    FileMenu->addAction(OpenFolderAction);
-    FileMenu->addAction(NewFileAction);
-    FileMenu->addAction(NewFolderAction);
+    OpenAction = new QAction(tr("打开文件"),FileMenu);
+    OpenProjectAction = new QAction(tr("打开项目"),FileMenu);
+    NewAction = new QAction(tr("新建文件"),FileMenu);
+    NewProjectAction = new QAction(tr("新建项目"),FileMenu);
+    SaveFileAction = new QAction(tr("保存当前文件"),FileMenu);
+    CloseAction = new QAction(tr("关闭当前文件"),FileMenu);
+    CloseProjectAction = new QAction(tr("关闭当前项目"),FileMenu);
+    connect(OpenAction,&QAction::triggered,this,&MainWindow::OpenActionWindow);
+    connect(NewAction,&QAction::triggered,this,&MainWindow::NewActionWindow);
+    connect(NewProjectAction,&QAction::triggered,this,&MainWindow::NewProjectWindow);
+    connect(SaveFileAction,&QAction::triggered,this,&MainWindow::SaveFileFunction);
+    connect(CloseAction,&QAction::triggered,this,&MainWindow::CloseFunction);
+    connect(CloseProjectAction,&QAction::triggered,this,&MainWindow::CloseProject);
+    FileMenu->addAction(OpenAction);
+    FileMenu->addAction(OpenProjectAction);
+    FileMenu->addAction(NewAction);
+    FileMenu->addAction(NewProjectAction);
+    FileMenu->addAction(SaveFileAction);
+    FileMenu->addAction(CloseAction);
+    FileMenu->addAction(CloseProjectAction);
     BuildMenu = new QMenu(tr("构建"));
     TerminalMenu = new QMenu(tr("终端"));
     NewTerminal = new QAction(tr("打开一个新终端"),TerminalMenu);
@@ -70,7 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
     TopMenuBar->addMenu(BuildMenu);
     TopMenuBar->addMenu(TerminalMenu);
     //Top Menu end
-    CodingTextEdit = new QTextEdit(tr("hygtfygvyuHello C++"));
+    CodingTextEdit = new QTextEdit(tr("#include<stdio.h>"));
     RightWindowSplitter->addWidget(CodingTextEdit);
 }
 
@@ -79,25 +85,41 @@ MainWindow::~MainWindow()
 
 }
 
-void MainWindow::OpenFileClicked()
-{
-   QString getName = QFileDialog::getOpenFileName(this,"","/","All file(*,*);;C file(*.cpp)");
-}
-
-void MainWindow::OpenFolderClicked()
+void MainWindow::OpenActionWindow()
 {
 
 }
 
-void MainWindow::NewFileClicked()
-{
-
-}
-
-void MainWindow::NewFolderClicked()
+void MainWindow::OpenProjectWindow()
 {
     NewFolder* folder = new NewFolder;
     folder->show();
+}
+
+void MainWindow::NewActionWindow()
+{
+
+}
+
+void MainWindow::NewProjectWindow()
+{
+    NewFolder* folder = new NewFolder;
+    folder->show();
+}
+
+void MainWindow::SaveFileFunction()
+{
+
+}
+
+void MainWindow::CloseFunction()
+{
+
+}
+
+void MainWindow::CloseProject()
+{
+
 }
 
 void MainWindow::AboutBRS()

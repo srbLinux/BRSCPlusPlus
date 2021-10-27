@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "Newfolder.h"
+#include "./MainWindow/TopMenuWindow/Newfolder.h"
 
 #include <QList>
 #include <QMenu>
@@ -42,10 +42,13 @@ private:
     //Top Menu
     QMenuBar* TopMenuBar;
     QMenu* FileMenu;
-    QAction* OpenFileAction;
-    QAction* OpenFolderAction;
-    QAction* NewFileAction;
-    QAction* NewFolderAction;
+    QAction* NewAction;
+    QAction* OpenAction;
+    QAction* OpenProjectAction;
+    QAction* NewProjectAction;
+    QAction* SaveFileAction;
+    QAction* CloseAction;
+    QAction* CloseProjectAction;
     QMenu* BuildMenu;
     QMenu* TerminalMenu;
     QAction* NewTerminal;
@@ -57,10 +60,13 @@ private:
     QAction* ProjectAction;
 public slots:
     //File Menu
-    void OpenFileClicked();
-    void OpenFolderClicked();
-    void NewFileClicked();
-    void NewFolderClicked();
+    void NewActionWindow();
+    void OpenActionWindow();
+    void OpenProjectWindow();
+    void NewProjectWindow();
+    void SaveFileFunction();
+    void CloseFunction();
+    void CloseProject();
     //Terminal Menu
     void OpenTerminalEdit();
     //About Menu
