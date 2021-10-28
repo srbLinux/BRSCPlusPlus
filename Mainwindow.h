@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "./MainWindow/TopMenuWindow/Newfile.h"
 #include "./MainWindow/TopMenuWindow/Newfolder.h"
 
 #include <QList>

@@ -98,7 +98,8 @@ void MainWindow::OpenProjectWindow()
 
 void MainWindow::NewActionWindow()
 {
-
+    NewFile* file = new NewFile;
+    file->show();
 }
 
 void MainWindow::NewProjectWindow()
