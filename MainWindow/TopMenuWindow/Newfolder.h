@@ -25,9 +25,16 @@ private:
     QListWidget* NewFolderList;
     QStackedWidget* NewStackWidget;
     QWidget* NewPorjectWidget;
+    QLineEdit* PathNameLine;
+    QLineEdit* NameLine;
     QPushButton* SearchBtn;
+    QPushButton* CancelBtn;
+    QPushButton* OkBtn;
     QListWidgetItem* NewProjectItem;
 public slots:
+    void SearchClicked();
+    void OKBtnClicked();
+    void CancelClicked();
 signals:
 
 };

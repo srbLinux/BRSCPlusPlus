@@ -13,6 +13,7 @@ class NewFile : public QWidget
 public:
     explicit NewFile(QWidget *parent = nullptr);
 private:
+    QHBoxLayout* MainLayout;
 
 signals:
 
