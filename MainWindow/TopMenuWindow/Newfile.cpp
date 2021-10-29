@@ -331,9 +331,10 @@ HeaderFile::HeaderFile(QWidget* parent) : QWidget(parent)
 
 void HeaderFile::SearchBtnClicked()
 {
-    PathNameLine->setText(QFileDialog::getExistingDirectory());}
+    PathNameLine->setText(QFileDialog::getExistingDirectory());
+}
 
-bool HeaderFile::LineText()
+bool HeaderFile::LineText() const
 {
     if(HeaderNameLine->text() == nullptr)
         return true;
@@ -362,7 +363,7 @@ void OtherFile::SearchBtnClicked()
     PathNameLine->setText(QFileDialog::getExistingDirectory());
 }
 
-bool OtherFile::LineText()
+bool OtherFile::LineText() const
 {
     if(OtherNameLine->text() == nullptr)
         return true;

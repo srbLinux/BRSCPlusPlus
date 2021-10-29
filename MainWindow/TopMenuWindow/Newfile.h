@@ -106,7 +106,7 @@ class HeaderFile : public QWidget
     Q_OBJECT
     friend class NewFile;
 public:
-    bool LineText();
+    bool LineText() const;
     explicit HeaderFile(QWidget* parent = nullptr);
 private:
     QGridLayout* MainLayout;
@@ -124,7 +124,7 @@ class OtherFile : public QWidget
     Q_OBJECT
     friend class NewFile;
 public:
-    bool LineText();
+    bool LineText() const;
     explicit OtherFile(QWidget* parent = nullptr);
 private:
     QGridLayout* MainLayout;

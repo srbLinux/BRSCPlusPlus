@@ -10,7 +10,7 @@
 class AboutBRS : public QDialog
 {
 public:
-    AboutBRS();
+    explicit AboutBRS(QDialog* parent);
 private:
     QLabel* BRSVersionLabel;
     QPushButton* OKBtn;

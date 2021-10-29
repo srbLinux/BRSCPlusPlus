@@ -43,12 +43,12 @@ set(PROJECT_SOURCES
         mos/include/PythonInLine.h
         mos/src/JavaInLine.cpp
         mos/src/PythonInLine.cpp
-        MainWindow/TopMenuWindow/Aboutbrs.h
-        MainWindow/TopMenuWindow/Aboutbrs.cpp
         MainWindow/TopMenuWindow/Openfloder.h
         MainWindow/TopMenuWindow/Openfloder.cpp
         MainWindow/TopMenuWindow/Newfile.h
         MainWindow/TopMenuWindow/Newfile.cpp
+        MainWindow/TopMenuWindow/Alldialog.h
+        MainWindow/TopMenuWindow/Alldialog.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
