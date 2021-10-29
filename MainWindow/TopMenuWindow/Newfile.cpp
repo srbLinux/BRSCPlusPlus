@@ -52,9 +52,9 @@ void NewFile::OkBtnClicked()
         FileSize = CLASS;
     else if(Cppfile->CppNameLine->text() != nullptr)
         FileSize = CPP;
-    else if(1)
+    else if(Headerfile->LineText() == false)
         FileSize = HEADER;
-    else
+    else if(Otherfile->LineText() == false)
         FileSize = OTHER;
     if(FileSize == CLASS)
     {
@@ -116,15 +116,35 @@ void NewFile::OkBtnClicked()
     }
     else if(FileSize == CPP)
     {
-
+        QString CPPName = Cppfile->CppNameLine->text();
+        QString Path = Cppfile->PathNameLine->text();
+        QFile file(Path + "/" + CPPName);
+        string _cpp = "#include <iostream>\nint main\n{\n   return 0;\n}\n";
+        file.open(QIODevice::ReadWrite | QIODevice::Text);
+        file.write(_cpp.c_str());
+        file.close();
+        close();
     }
     else if(FileSize == HEADER)
     {
-
+        QString HeaderName = Headerfile->HeaderNameLine->text();
+        QString Path = Headerfile->PathNameLine->text();
+        QString Define = HeaderName.toUpper();
+        QFile file(Path + "/" + HeaderName);
+        QString Header = "#ifndef " + Define +"\n#define" + Define + "\n#endif";
+        string _h = Header.toStdString();
+        file.write(_h.c_str());
+        file.close();
+        close();
     }
-    else
+    else if(FileSize == OTHER)
     {
-
+        QString OtherName = Otherfile->OtherNameLine->text();
+        QString Path = Otherfile->PathNameLine->text();
+        QFile file(Path + "/" + OtherName);
+        file.open(QIODevice::ReadWrite | QIODevice::Text);
+        file.close();
+        close();
     }
 }
 
@@ -271,6 +291,14 @@ HeaderFile::HeaderFile(QWidget* parent) : QWidget(parent)
     MainLayout->addWidget(PathNameLine,1,1);
 }
 
+bool HeaderFile::LineText()
+{
+    if(HeaderNameLine->text() == nullptr)
+        return true;
+    else
+        return false;
+}
+
 OtherFile::OtherFile(QWidget* parent) : QWidget(parent)
 {
     MainLayout = new QGridLayout(this);
@@ -282,4 +310,12 @@ OtherFile::OtherFile(QWidget* parent) : QWidget(parent)
     MainLayout->addWidget(OtherNameLine,0,1);
     MainLayout->addWidget(PathNameLabel,1,0);
     MainLayout->addWidget(PathNameLine,1,1);
+}
+
+bool OtherFile::LineText()
+{
+    if(OtherNameLine->text() == nullptr)
+        return true;
+    else
+        return false;
 }
