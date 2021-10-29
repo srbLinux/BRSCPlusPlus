@@ -61,6 +61,7 @@ void NewFile::OkBtnClicked()
         if(this->Classfile->HeaderNameChanged() == false && this->Classfile->CppNameChanged() == false \
                && this->Classfile->CppNameChanged() == false && this->Classfile->PathIsRight() == false)
         {
+                qDebug()<<"CLASS";
                 QString Path = Classfile->PathNameLine->text();
                 QString DEFINE = Classfile->ClassNameLine->text().toUpper() + "_H";
                 QString Class_h = "#ifndef " + DEFINE + "\n" + "#define " + DEFINE + "\n";
@@ -81,28 +82,52 @@ void NewFile::OkBtnClicked()
                 if(dir.exists(Path + "/src") && dir.exists(Path + "/include"))
                 {
                     QFile fp0(Path + "/src/" + CPPNAME);
-                    QFile fp1(Path + "/include" + HEADERNAME);
+                    QString path0 = Path + "/src/" + CPPNAME;
+                    QString path1 = Path + "/include/" + HEADERNAME;
+                    qDebug()<<path0<<" "<<path1;
+                    #ifdef __linux__
+                    string str0 = "touch " + path0.toStdString();
+                    const char* cmd0 = str0.c_str();
+                    popen(cmd0,"w");
+                    string str1 = "touch " + path1.toStdString();
+                    const char* cmd1 = str1.c_str();
+                    popen(cmd1,"w");
+                    #elif _WIN32
+                    #endif
                     fp0.open(QIODevice::ReadWrite | QIODevice::Text);
-                    fp1.open(QIODevice::ReadWrite | QIODevice::Text);
                     string _cpp = Class_cpp.toStdString();
-                    string _h = Class_h.toStdString();
                     fp0.write(_cpp.c_str());
-                    fp1.write(_h.c_str());
                     fp0.close();
+                    QFile fp1(Path + "/include" + HEADERNAME);
+                    fp1.open(QIODevice::ReadWrite | QIODevice::Text);
+                    string _h = Class_h.toStdString();
+                    fp1.write(_h.c_str());
                     fp1.close();
                     close();
                 }
                 else
                 {
                     QFile fp0(Path + "/" + CPPNAME);
-                    QFile fp1(Path + "/" + HEADERNAME);
+                    QString path0 = Path + "/src/" + CPPNAME;
+                    QString path1 = Path + "/include/" + HEADERNAME;
+                    qDebug()<<path0<<" "<<path1;
+                    #ifdef __linux__
+                    string str0 = "touch " + path0.toStdString();
+                    const char* cmd0 = str0.c_str();
+                    popen(cmd0,"w");
+                    string str1 = "touch " + path1.toStdString();
+                    const char* cmd1 = str1.c_str();
+                    popen(cmd1,"w");
+                    #elif _WIN32
+                    #endif
                     fp0.open(QIODevice::ReadWrite | QIODevice::Text);
-                    fp1.open(QIODevice::ReadWrite | QIODevice::Text);
                     string _cpp = Class_cpp.toStdString();
                     string _h = Class_h.toStdString();
                     fp0.write(_cpp.c_str());
-                    fp1.write(_h.c_str());
                     fp0.close();
+                    QFile fp1(Path + "/" + HEADERNAME);
+                    fp1.open(QIODevice::ReadWrite | QIODevice::Text);
+                    fp1.write(_h.c_str());
                     fp1.close();
                     close();
                 }
@@ -119,10 +144,10 @@ void NewFile::OkBtnClicked()
         QString CPPName = Cppfile->CppNameLine->text();
         QString Path = Cppfile->PathNameLine->text();
         QFile file(Path + "/" + CPPName);
-        string _cpp = "#include <iostream>\nint main\n{\n   return 0;\n}\n";
         file.open(QIODevice::ReadWrite | QIODevice::Text);
+        string _cpp = "#include <iostream>\nint main\n{\n   return 0;\n}\n";
         file.write(_cpp.c_str());
-        file.close();
+        //file.close();
         close();
     }
     else if(FileSize == HEADER)
@@ -131,6 +156,7 @@ void NewFile::OkBtnClicked()
         QString Path = Headerfile->PathNameLine->text();
         QString Define = HeaderName.toUpper();
         QFile file(Path + "/" + HeaderName);
+        file.open(QIODevice::ReadWrite | QIODevice::Text);
         QString Header = "#ifndef " + Define +"\n#define" + Define + "\n#endif";
         string _h = Header.toStdString();
         file.write(_h.c_str());
@@ -230,6 +256,7 @@ bool ClassFile::CppNameChanged()
 
 bool ClassFile::PathIsRight()
 {
+    PathNameLine->setText(QFileDialog::getExistingDirectory());
     string Path = PathNameLine->text().toStdString();
     string FolderName = "";
     for(int i = Path.size() - 1;i >= 0;i--)
@@ -272,10 +299,18 @@ CppFile::CppFile(QWidget* parent) : QWidget(parent)
     CppNameLine = new QLineEdit;
     PathNameLabel = new QLabel(tr("新建源文件路径"));
     PathNameLine = new QLineEdit;
+    SearchPathBtn = new QPushButton(tr("浏览..."));
     MainLayout->addWidget(CppNameLabel,0,0);
     MainLayout->addWidget(CppNameLine,0,1);
     MainLayout->addWidget(PathNameLabel,1,0);
     MainLayout->addWidget(PathNameLine,1,1);
+    MainLayout->addWidget(SearchPathBtn,1,2);
+    connect(SearchPathBtn,&QPushButton::clicked,this,&CppFile::SearchBtnClicked);
+}
+
+void CppFile::SearchBtnClicked()
+{
+    PathNameLine->setText(QFileDialog::getExistingDirectory());
 }
 
 HeaderFile::HeaderFile(QWidget* parent) : QWidget(parent)
@@ -285,11 +320,18 @@ HeaderFile::HeaderFile(QWidget* parent) : QWidget(parent)
     HeaderNameLine = new QLineEdit;
     PathNameLabel = new QLabel(tr("新建头文件路径"));
     PathNameLine = new QLineEdit;
+    SearchPathBtn = new QPushButton(tr("浏览..."));
     MainLayout->addWidget(HeaderNameLabel,0,0);
     MainLayout->addWidget(HeaderNameLine,0,1);
     MainLayout->addWidget(PathNameLabel,1,0);
     MainLayout->addWidget(PathNameLine,1,1);
+    MainLayout->addWidget(SearchPathBtn,1,2);
+    connect(SearchPathBtn,&QPushButton::clicked,this,&HeaderFile::SearchBtnClicked);
 }
+
+void HeaderFile::SearchBtnClicked()
+{
+    PathNameLine->setText(QFileDialog::getExistingDirectory());}
 
 bool HeaderFile::LineText()
 {
@@ -306,10 +348,18 @@ OtherFile::OtherFile(QWidget* parent) : QWidget(parent)
     OtherNameLine = new QLineEdit;
     PathNameLabel = new QLabel(tr("新建其他文件路径"));
     PathNameLine = new QLineEdit;
+    SearchPathBtn = new QPushButton(tr("浏览..."));
     MainLayout->addWidget(OtherNameLabel,0,0);
     MainLayout->addWidget(OtherNameLine,0,1);
     MainLayout->addWidget(PathNameLabel,1,0);
     MainLayout->addWidget(PathNameLine,1,1);
+    MainLayout->addWidget(SearchPathBtn,1,2);
+    connect(SearchPathBtn,&QPushButton::clicked,this,&OtherFile::SearchBtnClicked);
+}
+
+void OtherFile::SearchBtnClicked()
+{
+    PathNameLine->setText(QFileDialog::getExistingDirectory());
 }
 
 bool OtherFile::LineText()

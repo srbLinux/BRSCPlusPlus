@@ -15,8 +15,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(QRC_SOURCE_FILES FilePicture.qrc)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Sql REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Sql REQUIRED Core)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql REQUIRED Core)
 find_package(usr/local/lib)
 find_package(usr/local/boost/lib)
 
@@ -75,7 +75,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(BRSCPlusPlus PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::Gui)
+target_link_libraries(BRSCPlusPlus PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::Gui)
 
 set_target_properties(BRSCPlusPlus PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

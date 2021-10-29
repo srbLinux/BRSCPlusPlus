@@ -2,8 +2,10 @@
 #define NEWFILE_H
 
 #include <QDir>
+#include <cstdio>
 #include <QLabel>
 #include <QWidget>
+#include <unistd.h>
 #include <QtWidgets>
 #include <QListWidget>
 #include <QHBoxLayout>
@@ -94,6 +96,9 @@ private:
     QLineEdit* CppNameLine;
     QLabel* PathNameLabel;
     QLineEdit* PathNameLine;
+    QPushButton* SearchPathBtn;
+public slots:
+    void SearchBtnClicked();
 };
 
 class HeaderFile : public QWidget
@@ -109,6 +114,9 @@ private:
     QLineEdit* HeaderNameLine;
     QLabel* PathNameLabel;
     QLineEdit* PathNameLine;
+    QPushButton* SearchPathBtn;
+public slots:
+    void SearchBtnClicked();
 };
 
 class OtherFile : public QWidget
@@ -124,6 +132,9 @@ private:
     QLineEdit* OtherNameLine;
     QLabel* PathNameLabel;
     QLineEdit* PathNameLine;
+    QPushButton* SearchPathBtn;
+public slots:
+    void SearchBtnClicked();
 };
 
 #endif // NEWFILE_H
