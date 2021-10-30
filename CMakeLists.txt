@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(BRSCPlusPlus VERSION 0.1 LANGUAGES CXX)
 
-file(GLOB_RECURSE QRC_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/SourceFile/*.qrc)
+file(GLOB_RECURSE QRC_SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/MainWindow/LeftToolWindow/Image/*.qrc)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -13,16 +13,22 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(QRC_SOURCE_FILES FilePicture.qrc)
+set(QRC_SOURCE_FILES images.qrc)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Sql REQUIRED Core)
+
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql REQUIRED Core)
+
 find_package(usr/local/lib)
+
 find_package(usr/local/boost/lib)
 
 qt6_add_resources(QRC_FILES ${QRC_SOURCE_FILES})
 
 source_group("Resource Files" FILES ${QRC_SOURCE_FILES})
+
+add_library(${PROJECT_NAME}
+    ${QRC_FILES})
 
 include_directories(/usr/include/boost/include)
 include_directories(/usr/include/python2.7)
@@ -75,6 +81,7 @@ else()
     else()
         add_executable(BRSCPlusPlus
             ${PROJECT_SOURCES}
+            ${QRC_FILE}
         )
     endif()
 endif()

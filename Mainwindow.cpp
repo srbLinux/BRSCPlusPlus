@@ -23,8 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
     MainWindowLayout->setStretchFactor(SecondWindowLayout,20);
     LeftToolBarSplitter = new QSplitter;
     ProjectWindowSplitter = new QSplitter;
+    LeftMainLayout = new QHBoxLayout;
     RightWindowSplitter = new QSplitter(Qt::Horizontal);
-    SecondWindowLayout->addWidget(LeftToolBarSplitter);
+    SecondWindowLayout->addLayout(LeftMainLayout);
     SecondWindowLayout->addWidget(ProjectWindowSplitter);
     SecondWindowLayout->addWidget(RightWindowSplitter);
     SecondWindowLayout->setStretchFactor(LeftToolBarSplitter,1);
@@ -33,13 +34,24 @@ MainWindow::MainWindow(QWidget *parent)
     /*
      * Left Tool
     */
-    LeftToolBar = new QToolBar;
-    LeftToolBarSplitter->addWidget(LeftToolBar);
-    ProjectAction = new QAction(tr("资源管理器"),LeftToolBar);
+    LeftTopBar = new QToolBar;
+    LeftToolLayout = new QVBoxLayout;
+    NULLLabel = new QLabel;
+    LeftButtomBar = new QToolBar;
+    LeftMainLayout->addLayout(LeftToolLayout);
+    LeftMainLayout->addWidget(LeftToolBarSplitter);
+    LeftToolLayout->addWidget(LeftTopBar);
+    LeftToolLayout->addWidget(NULLLabel);
+    LeftToolLayout->addWidget(LeftButtomBar);
+    LeftToolLayout->setStretchFactor(LeftTopBar,1);
+    qDebug()<<"1";
+    LeftToolLayout->setStretchFactor(NULLLabel,1);
+    LeftToolLayout->setStretchFactor(LeftButtomBar,1);
+    ProjectAction = new QAction(tr("资源管理器"),LeftTopBar);
     ProjectTextEdit = new QTextEdit();
     ProjectWindowSplitter->addWidget(ProjectTextEdit);
     ProjectWindowSplitter->hide();
-    LeftToolBar->addAction(ProjectAction);
+    LeftTopBar->addAction(ProjectAction);
     connect(ProjectAction,&QAction::triggered,this,&MainWindow::OpenPorjectEdit);
     /*
      * Top Menu

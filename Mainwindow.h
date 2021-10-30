@@ -62,8 +62,13 @@ private:
     QDockWidget* TerminalWindow;
     QMenu* AboutMenu;
     QMenu* Help;
-    QToolBar* LeftToolBar;
+    QVBoxLayout* LeftToolLayout;
+    QHBoxLayout* LeftMainLayout;
+    QToolBar* LeftTopBar;
     QAction* ProjectAction;
+    QLabel* NULLLabel;
+    QToolBar* LeftButtomBar;
+    QAction* BuildAction;
 public slots:
     //File Menu
     void NewActionWindow();
