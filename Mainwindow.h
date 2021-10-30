@@ -3,6 +3,8 @@
 
 #include "./MainWindow/TopMenuWindow/Newfile.h"
 #include "./MainWindow/TopMenuWindow/Newfolder.h"
+#include "./MainWindow/TopMenuWindow/Openfloder.h"
+#include "./MainWindow/TopMenuWindow/BuildAction.h"
 
 #include <QList>
 #include <QMenu>
@@ -51,6 +53,9 @@ private:
     QAction* CloseAction;
     QAction* CloseProjectAction;
     QMenu* BuildMenu;
+    QAction* NewBuildToExecAction;
+    QAction* NewBuildOnlyCMakeAction;
+    QAction* RebuildToExecAction;
     QMenu* TerminalMenu;
     QAction* NewTerminal;
     QAction* DeleteTerminal;

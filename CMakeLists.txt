@@ -49,6 +49,10 @@ set(PROJECT_SOURCES
         MainWindow/TopMenuWindow/Newfile.cpp
         MainWindow/TopMenuWindow/Alldialog.h
         MainWindow/TopMenuWindow/Alldialog.cpp
+        MainWindow/TopMenuWindow/BuildAction.h
+        MainWindow/TopMenuWindow/BuildAction.cpp
+        MainWindow/LeftToolWindow/ProjectFileTree.cpp
+        MainWindow/LeftToolWindow/ProjectFileTree.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
