@@ -1,6 +1,6 @@
 #include "Aboutbrs.h"
 
-AboutBRS::AboutBRS()
+AboutBRS::AboutBRS(QDialog* parent) : QDialog(parent)
 {
     resize(300,100);
     AboutBRSLayout = new QGridLayout(this);
