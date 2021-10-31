@@ -88,5 +88,7 @@ public slots:
     void AboutBRS();
     //Project Action
     void OpenPorjectEdit();
+    //
+    void ReadFileEdit(QString Path);
 };
 #endif // MAINWINDOW_H

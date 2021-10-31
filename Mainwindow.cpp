@@ -93,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
     //Top Menu end
     CodingTextEdit = new QTextEdit(tr("#include<stdio.h>"));
     RightWindowSplitter->addWidget(CodingTextEdit);
+    connect(Treemenu,SIGNAL(MyItemDoubleClicked(QString)),this,SLOT(ReadFileEdit(QString)));
 }
 
 MainWindow::~MainWindow()
@@ -163,6 +164,11 @@ void MainWindow::OpenPorjectEdit()
     else
         ProjectWindowSplitter->setVisible(false);
     ProjectNumber++;
+}
+
+void MainWindow::ReadFileEdit(QString Path)
+{
+    QFile file(Path);
 }
 
 void MainWindow::OpenTerminalEdit()

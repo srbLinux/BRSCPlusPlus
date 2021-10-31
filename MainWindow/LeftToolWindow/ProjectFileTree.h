@@ -30,8 +30,9 @@ private:
     QTreeWidgetItem* RootTreeItem;
 
 signals:
+    void MyItemDoubleClicked(QString AbsolutePath);
 public slots:
-
+    void DoubleClickedPath(QTreeWidgetItem* item,int column);
 };
 
 #endif // PROJECTFILETREE_H

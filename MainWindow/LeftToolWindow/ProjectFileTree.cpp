@@ -13,6 +13,7 @@ TreeMenu::TreeMenu(QTreeWidget* parent) : QTreeWidget(parent)
     setColumnCount(1);
     setHeaderLabel(tr("资源管理器"));
     CreateTreeRoot();
+    connect(this,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,SLOT(DoubleClickedPath(QTreeWidgetItem*,int)));
 }
 
 void TreeMenu::CreateTreeRoot()
@@ -82,8 +83,22 @@ QString TreeMenu::GetFileFormat(QString FileName)
             break;
         }
     }
-    //qDebug()<<Format;
     return Format;
+}
+
+void TreeMenu::DoubleClickedPath(QTreeWidgetItem *item, int column)
+{
+    QString Path = item->toolTip(0);
+    QFileInfo* FileInfo = new QFileInfo(Path);
+    this->resizeColumnToContents(0);
+    if(FileInfo->isFile())
+    {
+        emit MyItemDoubleClicked(Path);
+    }
+    else
+    {
+
+    }
 }
 
 QString TreeMenu::GetOpenFolder()
