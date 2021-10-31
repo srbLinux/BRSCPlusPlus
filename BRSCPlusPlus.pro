@@ -19,7 +19,6 @@ SOURCES += \
     MainWindow/TopMenuWindow/BuildAction.cpp \
     MainWindow/TopMenuWindow/Newfile.cpp \
     MainWindow/TopMenuWindow/Newfolder.cpp \
-    MainWindow/TopMenuWindow/Openfloder.cpp \
     mos/src/JavaInLine.cpp \
     mos/src/PythonInLine.cpp
 
@@ -33,10 +32,12 @@ HEADERS += \
     MainWindow/TopMenuWindow/BuildAction.h \
     MainWindow/TopMenuWindow/Newfile.h \
     MainWindow/TopMenuWindow/Newfolder.h \
-    MainWindow/TopMenuWindow/Openfloder.h \
     mos/include/JavaInLine.h \
     mos/include/PythonInLine.h
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    MainWindow/LeftToolWindow/image_source.qrc

@@ -5,6 +5,7 @@
 #include "./MainWindow/TopMenuWindow/Newfolder.h"
 #include "./MainWindow/TopMenuWindow/Openfloder.h"
 #include "./MainWindow/TopMenuWindow/BuildAction.h"
+#include "./MainWindow/LeftToolWindow/ProjectFileTree.h"
 
 #include <QList>
 #include <QMenu>
@@ -25,11 +26,13 @@
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+    friend class TreeMenu;
 public:
     MainWindow(QWidget *parent = nullptr);
+    static QString GetOpenFolderName();
     static int TerminalNumber;
     static int ProjectNumber;
+    static QString ProjectName;
     ~MainWindow();
 private:
     //Layout
@@ -40,7 +43,6 @@ private:
     QSplitter* ProjectWindowSplitter;
     QSplitter* RightWindowSplitter;
     //
-    QTextEdit* ProjectTextEdit;
     QTextEdit* CodingTextEdit;
     //Top Menu
     QMenuBar* TopMenuBar;
@@ -62,8 +64,10 @@ private:
     QDockWidget* TerminalWindow;
     QMenu* AboutMenu;
     QMenu* Help;
+    //Left Tool
     QVBoxLayout* LeftToolLayout;
     QHBoxLayout* LeftMainLayout;
+    TreeMenu* Treemenu;
     QToolBar* LeftTopBar;
     QAction* ProjectAction;
     QLabel* NULLLabel;
@@ -73,7 +77,7 @@ public slots:
     //File Menu
     void NewActionWindow();
     void OpenActionWindow();
-    void OpenProjectWindow();
+    QString OpenProjectWindow();
     void NewProjectWindow();
     void SaveFileFunction();
     void CloseFunction();

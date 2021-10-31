@@ -98,5 +98,15 @@ void NewFolder::SearchClicked()
     PathNameLine->setText(QFileDialog::getExistingDirectory());
 }
 
+QPushButton* NewFolder::GetOkBtn() const
+{
+    return OkBtn;
+}
+
+QPushButton* NewFolder::GetCancelBtn() const
+{
+    return CancelBtn;
+}
+
 
 

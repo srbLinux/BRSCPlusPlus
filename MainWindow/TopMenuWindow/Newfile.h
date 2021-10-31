@@ -34,6 +34,8 @@ class NewFile : public QWidget
     Q_OBJECT
 public:
     explicit NewFile(QWidget *parent = nullptr);
+    QPushButton* GetOkBtn() const;
+    QPushButton* GetCancelBtn() const;
     static int FileSize;
 private:
     QHBoxLayout* MainLayout;

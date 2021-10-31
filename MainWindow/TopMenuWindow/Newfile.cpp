@@ -179,6 +179,16 @@ void NewFile::CancelBtnClicked()
     this->close();
 }
 
+QPushButton* NewFile::GetOkBtn() const
+{
+    return this->OkBtn;
+}
+
+QPushButton* NewFile::GetCancelBtn() const
+{
+    return this->CancelBtn;
+}
+
 ClassFile::ClassFile(QWidget* parent) : QWidget(parent)
 {
     ClassGridLayout = new QGridLayout(this);

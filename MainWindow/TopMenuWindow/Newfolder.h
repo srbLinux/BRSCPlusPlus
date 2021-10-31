@@ -19,6 +19,8 @@ class NewFolder : public QWidget
     Q_OBJECT
 public:
     explicit NewFolder(QWidget *parent = nullptr);
+    QPushButton* GetOkBtn() const;
+    QPushButton* GetCancelBtn() const;
 private:
     QHBoxLayout* MainLayout;
     QVBoxLayout* RightLayout;

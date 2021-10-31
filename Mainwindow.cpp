@@ -4,6 +4,8 @@ int MainWindow::TerminalNumber = 0;
 
 int MainWindow::ProjectNumber = 0;
 
+QString MainWindow::ProjectName = "";
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -34,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     /*
      * Left Tool
     */
+    Treemenu = new TreeMenu();
     LeftTopBar = new QToolBar;
     LeftToolLayout = new QVBoxLayout;
     NULLLabel = new QLabel;
@@ -48,8 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
     LeftToolLayout->setStretchFactor(NULLLabel,1);
     LeftToolLayout->setStretchFactor(LeftButtomBar,1);
     ProjectAction = new QAction(tr("资源管理器"),LeftTopBar);
-    ProjectTextEdit = new QTextEdit();
-    ProjectWindowSplitter->addWidget(ProjectTextEdit);
+    ProjectAction->setIcon(QIcon(":/RunImage/Image/Project.png"));
+    ProjectWindowSplitter->addWidget(Treemenu);
     ProjectWindowSplitter->hide();
     LeftTopBar->addAction(ProjectAction);
     connect(ProjectAction,&QAction::triggered,this,&MainWindow::OpenPorjectEdit);
@@ -65,6 +68,7 @@ MainWindow::MainWindow(QWidget *parent)
     CloseAction = new QAction(tr("关闭当前文件"),FileMenu);
     CloseProjectAction = new QAction(tr("关闭当前项目"),FileMenu);
     connect(OpenAction,&QAction::triggered,this,&MainWindow::OpenActionWindow);
+    connect(OpenProjectAction,&QAction::triggered,this,&MainWindow::OpenProjectWindow);
     connect(NewAction,&QAction::triggered,this,&MainWindow::NewActionWindow);
     connect(NewProjectAction,&QAction::triggered,this,&MainWindow::NewProjectWindow);
     connect(SaveFileAction,&QAction::triggered,this,&MainWindow::SaveFileFunction);
@@ -97,15 +101,24 @@ MainWindow::~MainWindow()
 
 }
 
+QString MainWindow::GetOpenFolderName()
+{
+    if(ProjectName != nullptr)
+        return ProjectName;
+    else
+        return nullptr;
+}
+
 void MainWindow::OpenActionWindow()
 {
 
 }
 
-void MainWindow::OpenProjectWindow()
+QString MainWindow::OpenProjectWindow()
 {
-    NewFolder* folder = new NewFolder;
-    folder->show();
+    ProjectName = QFileDialog::getExistingDirectory();
+    QString FolderName = ProjectName;
+    return FolderName;
 }
 
 void MainWindow::NewActionWindow()
