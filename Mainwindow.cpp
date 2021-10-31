@@ -169,6 +169,9 @@ void MainWindow::OpenPorjectEdit()
 void MainWindow::ReadFileEdit(QString Path)
 {
     QFile file(Path);
+    file.open(QIODevice::ReadOnly);
+    QString Text = file.readAll();
+    CodingTextEdit->setText(Text);
 }
 
 void MainWindow::OpenTerminalEdit()

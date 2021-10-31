@@ -1,6 +1,7 @@
 #ifndef BUILDACTION_H
 #define BUILDACTION_H
 
+#include <cstdio>
 #include <QWidget>
 
 class BuildAction : public QWidget
