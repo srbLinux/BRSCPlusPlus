@@ -3,5 +3,8 @@
         <file>Image/Project.png</file>
         <file>Image/File.png</file>
         <file>Image/Folder.png</file>
+        <file>Image/cpp.png</file>
+        <file>Image/header.png</file>
+        <file>Image/其他文件.png</file>
     </qresource>
 </RCC>

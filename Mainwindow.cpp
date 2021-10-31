@@ -4,7 +4,7 @@ int MainWindow::TerminalNumber = 0;
 
 int MainWindow::ProjectNumber = 0;
 
-QString MainWindow::ProjectName = "";
+QString MainWindow::ProjectName = nullptr;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -47,7 +47,6 @@ MainWindow::MainWindow(QWidget *parent)
     LeftToolLayout->addWidget(NULLLabel);
     LeftToolLayout->addWidget(LeftButtomBar);
     LeftToolLayout->setStretchFactor(LeftTopBar,1);
-    qDebug()<<"1";
     LeftToolLayout->setStretchFactor(NULLLabel,1);
     LeftToolLayout->setStretchFactor(LeftButtomBar,1);
     ProjectAction = new QAction(tr("资源管理器"),LeftTopBar);
@@ -104,7 +103,10 @@ MainWindow::~MainWindow()
 QString MainWindow::GetOpenFolderName()
 {
     if(ProjectName != nullptr)
+    {
+        qDebug()<<ProjectName;
         return ProjectName;
+    }
     else
         return nullptr;
 }
@@ -118,6 +120,7 @@ QString MainWindow::OpenProjectWindow()
 {
     ProjectName = QFileDialog::getExistingDirectory();
     QString FolderName = ProjectName;
+    qDebug()<<ProjectName;
     return FolderName;
 }
 

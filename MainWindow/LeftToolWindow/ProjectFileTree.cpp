@@ -1,6 +1,8 @@
 #include "ProjectFileTree.h"
 #include "../../Mainwindow.h"
 
+#include <QDebug>
+
 ProjectFileTree::ProjectFileTree()
 {
 
@@ -8,76 +10,84 @@ ProjectFileTree::ProjectFileTree()
 
 TreeMenu::TreeMenu(QTreeWidget* parent) : QTreeWidget(parent)
 {
-    this->setObjectName("TreeMenu");
-    this->verticalScrollBar()->setObjectName("TreemenuVerticl");
-    this->horizontalScrollBar()->setObjectName("TreeMenuHorizontal");
-    this->setColumnCount(1);
-    this->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
-    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    this->setAutoScroll(true);
-    this->header()->setVisible(false);
-    this->setFrameStyle(QFrame::Sunken);
-    this->setAnimated(true);
-    Newfile = new NewFile();
-    connect(Newfile->GetOkBtn(),SIGNAL(clicked(bool)),this,SLOT(BuildNewFile()));
-    connect(Newfile->GetCancelBtn(),&QPushButton::clicked,this,&TreeMenu::CloseBuildFile);
-    Newfolder = new NewFolder();
+    setColumnCount(1);
+    setHeaderLabel(tr("资源管理器"));
+    CreateTreeRoot();
+}
 
+void TreeMenu::CreateTreeRoot()
+{
+    QDir* dir = new QDir(GetOpenFolder());
+    qDebug()<<"TreeMenu: "<<GetOpenFolder();
+    RootTreeItem = new QTreeWidgetItem();
+    this->addTopLevelItem(RootTreeItem);
+    RootTreeItem->setText(0,dir->dirName());
+    SetProjectFileTree(dir,RootTreeItem);
+}
+
+void TreeMenu::SetProjectFileTree(QDir *Path, QTreeWidgetItem *parent)
+{
+    QStringList AllFileName = Path->entryList();
+    QString PathName = Path->absolutePath();
+    for(int i = 2;i < AllFileName.size();i++)
+    {
+        QFileInfo* FileInfo = new QFileInfo(PathName + "/" + AllFileName[i]);
+        if(FileInfo->isFile())
+        {
+            if(GetFileFormat(AllFileName[i]) == ".cpp")
+            {
+                //qDebug()<<".CPP: "<<AllFileName[i];
+                QTreeWidgetItem* item = new QTreeWidgetItem(parent);
+                item->setText(0,AllFileName[i]);
+                item->setIcon(0,QIcon(":/RunImage/Image/cpp.png"));
+                item->setToolTip(0,PathName + "/" + AllFileName[i]);
+            }
+            else if(GetFileFormat(AllFileName[i]) == ".h")
+            {
+                QTreeWidgetItem* item = new QTreeWidgetItem(parent);
+                item->setText(0,AllFileName[i]);
+                item->setIcon(0,QIcon(":/RunImage/Image/header.png"));
+                item->setToolTip(0,PathName + "/" + AllFileName[i]);
+            }
+            else if(GetFileFormat(AllFileName[i]) == nullptr)
+            {
+                QTreeWidgetItem* item = new QTreeWidgetItem(parent);
+                item->setText(0,AllFileName[i]);
+                item->setIcon(0,QIcon(":/RunImage/Image/其他文件.png"));
+                item->setToolTip(0,PathName + "/" + AllFileName[i]);
+            }
+        }
+        else if(FileInfo->isDir())
+        {
+            QTreeWidgetItem* item = new QTreeWidgetItem(parent);
+            item->setText(0,AllFileName[i]);
+            item->setIcon(0,QIcon(":/RunImage/Image/Folder.png"));
+            item->setToolTip(0,PathName + "/" + AllFileName[i]);
+            QDir* son = new QDir(PathName + "/" + AllFileName[i]);
+            SetProjectFileTree(son,item);
+        }
+    }
+}
+
+QString TreeMenu::GetFileFormat(QString FileName)
+{
+    QString Format = "";
+    for(int i = FileName.size() - 1;i >= 0;i--)
+    {
+        if(FileName[i] != '.')
+            Format.push_front(FileName[i]);
+        else
+        {
+            Format.push_front(FileName[i]);
+            break;
+        }
+    }
+    //qDebug()<<Format;
+    return Format;
 }
 
 QString TreeMenu::GetOpenFolder()
 {
     return MainWindow::GetOpenFolderName();
-}
-
-
-void TreeMenu::ButtonCollapseItem()
-{
-
-}
-
-void TreeMenu::CreateTopItem(QString Path)
-{
-
-}
-
-void TreeMenu::FindFile(QDir *Path, QTreeWidgetItem *parent)
-{
-
-}
-
-void TreeMenu::DoubleClickPath(QTreeWidgetItem* item,int clomn)
-{
-
-}
-
-void TreeMenu::ItemPressd(QTreeWidgetItem* item,int clomn)
-{
-
-}
-
-void TreeMenu::TempActionInformation(QAction* action)
-{
-
-}
-
-void TreeMenu::BuildNewFile(bool flag)
-{
-
-}
-
-void TreeMenu::BuildNewDir(bool flag)
-{
-
-}
-
-void TreeMenu::CloseBuildFile(bool flag)
-{
-
-}
-
-void TreeMenu::CancelDir(bool flag)
-{
-
 }
 
