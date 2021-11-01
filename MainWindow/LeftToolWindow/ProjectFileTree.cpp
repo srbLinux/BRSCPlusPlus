@@ -12,14 +12,13 @@ TreeMenu::TreeMenu(QTreeWidget* parent) : QTreeWidget(parent)
 {
     setColumnCount(1);
     setHeaderLabel(tr("资源管理器"));
-    CreateTreeRoot();
     connect(this,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,SLOT(DoubleClickedPath(QTreeWidgetItem*,int)));
 }
 
-void TreeMenu::CreateTreeRoot()
+void TreeMenu::CreateTreeRoot(QString PathName)
 {
-    QDir* dir = new QDir(GetOpenFolder());
-    qDebug()<<"TreeMenu: "<<GetOpenFolder();
+    QDir* dir = new QDir(PathName);
+    qDebug()<<"TreeMenu: "<<PathName;
     RootTreeItem = new QTreeWidgetItem();
     this->addTopLevelItem(RootTreeItem);
     RootTreeItem->setText(0,dir->dirName());
@@ -101,8 +100,9 @@ void TreeMenu::DoubleClickedPath(QTreeWidgetItem *item, int column)
     }
 }
 
-QString TreeMenu::GetOpenFolder()
+
+void TreeMenu::SetOpenFolder(QString Path)
 {
-    return MainWindow::GetOpenFolderName();
+    PathName = Path;
 }
 

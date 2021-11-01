@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/BRSFont">
+        <file>simsun.ttf</file>
+        <file>times.ttf</file>
+        <file>timesbd.ttf</file>
+        <file>timesbi.ttf</file>
+        <file>timesi.ttf</file>
+    </qresource>
+</RCC>

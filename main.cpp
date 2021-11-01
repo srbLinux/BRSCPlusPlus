@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     splash.finish(&w);
-    //Login logWin;
-    //logWin.show();
+    Login logWin;
+    logWin.show();
     return a.exec();
 }

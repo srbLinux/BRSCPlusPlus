@@ -42,7 +42,12 @@ void NewFolder::CancelClicked()
 
 void NewFolder::OKBtnClicked()
 {
-    QString Path = PathNameLine->text() + NameLine->text();
+    std::string Pathstr = PathNameLine->text().toStdString();
+    QString Path;
+    if(Pathstr[Pathstr.size() - 1] != '/')
+        Path = PathNameLine->text() + "/" + NameLine->text();
+    else
+        Path = PathNameLine->text() + NameLine->text();
     QDir dir;
     QString CMakeConcent = "cmake_minimum_required(VERSION 3.5)\n\
 project(TEXT)\n\

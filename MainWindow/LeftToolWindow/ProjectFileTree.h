@@ -21,17 +21,17 @@ class TreeMenu : public QTreeWidget
 {
     Q_OBJECT
 public:
-    void CreateTreeRoot();
-    QString GetOpenFolder();
+    void SetOpenFolder(QString Path);
     QString GetFileFormat(QString FileName);
     void SetProjectFileTree(QDir* Path,QTreeWidgetItem* parent);
     explicit TreeMenu(QTreeWidget* parent = nullptr);
 private:
     QTreeWidgetItem* RootTreeItem;
-
+    QString PathName;
 signals:
     void MyItemDoubleClicked(QString AbsolutePath);
 public slots:
+    void CreateTreeRoot(QString PathName);
     void DoubleClickedPath(QTreeWidgetItem* item,int column);
 };
 
