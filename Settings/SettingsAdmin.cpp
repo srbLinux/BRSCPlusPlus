@@ -42,5 +42,9 @@ SettingsAdmin::SettingsAdmin(QWidget *parent) : QWidget(parent)
 
 void SettingsAdmin::ApplyBtnClicked()
 {
+    if(colorWindow->ReturnAdmin() == HasChanged)
+    {
+
+    }
 
 }
