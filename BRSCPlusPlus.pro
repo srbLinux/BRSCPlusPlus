@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     Abstract.cpp \
+    Settings/Plugins/ColorAdmin.cpp \
     Settings/Plugins/FontAdmin.cpp \
     Settings/SettingsAdmin.cpp \
     main.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     MainWindow/TopMenuWindow/Alldialog.h \
     MainWindow/TopMenuWindow/Newfile.h \
     MainWindow/TopMenuWindow/Newfolder.h \
+    Settings/Plugins/ColorAdmin.h \
     Settings/Plugins/FontAdmin.h \
     Settings/SettingsAdmin.h \
     mos/include/JavaInLine.h \

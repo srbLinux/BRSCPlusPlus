@@ -111,6 +111,7 @@ public slots:
     void ReadFileEdit(QString Path);
     //ToolMenu
     void OpenSettingsWindow();
+    void ChangeBRSAllWindowColor(QString StrColor);
 };
 
 class ApplicationInfo : public QObject

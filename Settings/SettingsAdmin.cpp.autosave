@@ -42,5 +42,8 @@ SettingsAdmin::SettingsAdmin(QWidget *parent) : QWidget(parent)
 
 void SettingsAdmin::ApplyBtnClicked()
 {
-
+    if()
+    {
+        
+    }
 }

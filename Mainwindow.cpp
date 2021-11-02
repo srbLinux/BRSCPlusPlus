@@ -141,6 +141,11 @@ MainWindow::~MainWindow()
 
 }
 
+void MainWindow::ChangeBRSAllWindowColor(QString StrColor)
+{
+    ProjectWindowSplitter->setStyleSheet("");
+}
+
 void MainWindow::MakeFileClicked()
 {
     QDateTime time = QDateTime::currentDateTime();
