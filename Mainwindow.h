@@ -9,6 +9,7 @@
 
 #include <QList>
 #include <QMenu>
+#include <thread>
 #include <QLabel>
 #include <QAction>
 #include <QMenuBar>

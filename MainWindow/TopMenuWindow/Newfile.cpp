@@ -58,79 +58,86 @@ void NewFile::OkBtnClicked()
         FileSize = OTHER;
     if(FileSize == CLASS)
     {
-        if(this->Classfile->HeaderNameChanged() == false && this->Classfile->CppNameChanged() == false \
-               && this->Classfile->CppNameChanged() == false && this->Classfile->PathIsRight() == false)
-        {
+            if(this->Classfile->HeaderNameChanged() == false && this->Classfile->CppNameChanged() == false \
+                    && this->Classfile->CppNameChanged() == false && this->Classfile->PathIsRight() == false)
+            {
+               auto a = [&] (){
                 qDebug()<<"CLASS";
                 QString Path = Classfile->PathNameLine->text();
                 QString DEFINE = Classfile->ClassNameLine->text().toUpper() + "_H";
                 QString Class_h = "#ifndef " + DEFINE + "\n" + "#define " + DEFINE + "\n";
                 Class_h += "#include <iostream>\n\
-        using namespace std;\nclass " + Classfile->ClassNameLine->text() +"\n\
-        {\n\
-            public:\n\
-                explicit " + Classfile->ClassNameLine->text() +"();\n\
-                ~" + Classfile->ClassNameLine->text() + "();\n\
-            private:\n\
-        };\n";
-                QString Class_cpp = "#include \"../include/" + Classfile->HeaderNameLine->text() +"\"\n\
-        " + Classfile->ClassNameLine->text() + "::" + Classfile->ClassNameLabel->text() + "()\n\
-        {\n\n\n}\n" + Classfile->ClassNameLine->text() + "::~" + Classfile->ClassNameLine->text() + "()\n{\n\n}\n";
-                QDir dir;
-                QString CPPNAME = Cppfile->CppNameLine->text();
-                QString HEADERNAME = Headerfile->HeaderNameLine->text();
-                if(dir.exists(Path + "/src") && dir.exists(Path + "/include"))
-                {
-                    QFile fp0(Path + "/src/" + CPPNAME);
-                    QString path0 = Path + "/src/" + CPPNAME;
-                    QString path1 = Path + "/include/" + HEADERNAME;
-                    qDebug()<<path0<<" "<<path1;
-                    #ifdef __linux__
-                    string str0 = "touch " + path0.toStdString();
-                    const char* cmd0 = str0.c_str();
-                    popen(cmd0,"w");
-                    string str1 = "touch " + path1.toStdString();
-                    const char* cmd1 = str1.c_str();
-                    popen(cmd1,"w");
-                    #elif _WIN32
-                    #endif
-                    fp0.open(QIODevice::ReadWrite | QIODevice::Text);
-                    string _cpp = Class_cpp.toStdString();
-                    fp0.write(_cpp.c_str());
-                    fp0.close();
-                    QFile fp1(Path + "/include" + HEADERNAME);
-                    fp1.open(QIODevice::ReadWrite | QIODevice::Text);
-                    string _h = Class_h.toStdString();
-                    fp1.write(_h.c_str());
-                    fp1.close();
-                    close();
-                }
-                else
-                {
-                    QFile fp0(Path + "/" + CPPNAME);
-                    QString path0 = Path + "/src/" + CPPNAME;
-                    QString path1 = Path + "/include/" + HEADERNAME;
-                    qDebug()<<path0<<" "<<path1;
-                    #ifdef __linux__
-                    string str0 = "touch " + path0.toStdString();
-                    const char* cmd0 = str0.c_str();
-                    popen(cmd0,"w");
-                    string str1 = "touch " + path1.toStdString();
-                    const char* cmd1 = str1.c_str();
-                    popen(cmd1,"w");
-                    #elif _WIN32
-                    #endif
-                    fp0.open(QIODevice::ReadWrite | QIODevice::Text);
-                    string _cpp = Class_cpp.toStdString();
-                    string _h = Class_h.toStdString();
-                    fp0.write(_cpp.c_str());
-                    fp0.close();
-                    QFile fp1(Path + "/" + HEADERNAME);
-                    fp1.open(QIODevice::ReadWrite | QIODevice::Text);
-                    fp1.write(_h.c_str());
-                    fp1.close();
-                    close();
-                }
+                        using namespace std;\nclass " + Classfile->ClassNameLine->text() +"\n\
+                {\n\
+                            public:\n\
+                                    explicit " + Classfile->ClassNameLine->text() +"();\n\
+                            ~" + Classfile->ClassNameLine->text() + "();\n\
+                            private:\n\
+                };\n";
+                            QString Class_cpp = "#include \"../include/" + Classfile->HeaderNameLine->text() +"\"\n\
+                                                                                                              " + Classfile->ClassNameLine->text() + "::" + Classfile->ClassNameLabel->text() + "()\n\
+                    {\n\n\n}\n" + Classfile->ClassNameLine->text() + "::~" + Classfile->ClassNameLine->text() + "()\n{\n\n}\n";
+                            QDir dir;
+                    QString CPPNAME = Cppfile->CppNameLine->text();
+                    QString HEADERNAME = Headerfile->HeaderNameLine->text();
+                    if(dir.exists(Path + "/src") && dir.exists(Path + "/include"))
+                    {
+                        QFile fp0(Path + "/src/" + CPPNAME);
+                        QString path0 = Path + "/src/" + CPPNAME;
+                        QString path1 = Path + "/include/" + HEADERNAME;
+                        qDebug()<<path0<<" "<<path1;
+#ifdef __linux__
+                        string str0 = "touch " + path0.toStdString();
+                        const char* cmd0 = str0.c_str();
+                        popen(cmd0,"w");
+                        string str1 = "touch " + path1.toStdString();
+                        const char* cmd1 = str1.c_str();
+                        popen(cmd1,"w");
+#elif _WIN32
+#endif
+                        fp0.open(QIODevice::ReadWrite | QIODevice::Text);
+                        string _cpp = Class_cpp.toStdString();
+                        fp0.write(_cpp.c_str());
+                        fp0.close();
+                        QFile fp1(Path + "/include" + HEADERNAME);
+                        fp1.open(QIODevice::ReadWrite | QIODevice::Text);
+                        string _h = Class_h.toStdString();
+                        fp1.write(_h.c_str());
+                        fp1.close();
+                        emit BroadcastCreated(1);
+                        close();
+                    }
+                    else
+                    {
+                        QFile fp0(Path + "/" + CPPNAME);
+                        QString path0 = Path + "/src/" + CPPNAME;
+                        QString path1 = Path + "/include/" + HEADERNAME;
+                        qDebug()<<path0<<" "<<path1;
+#ifdef __linux__
+                        string str0 = "touch " + path0.toStdString();
+                        const char* cmd0 = str0.c_str();
+                        popen(cmd0,"w");
+                        string str1 = "touch " + path1.toStdString();
+                        const char* cmd1 = str1.c_str();
+                        popen(cmd1,"w");
+#elif _WIN32
+#endif
+                        fp0.open(QIODevice::ReadWrite | QIODevice::Text);
+                        string _cpp = Class_cpp.toStdString();
+                        string _h = Class_h.toStdString();
+                        fp0.write(_cpp.c_str());
+                        fp0.close();
+                        QFile fp1(Path + "/" + HEADERNAME);
+                        fp1.open(QIODevice::ReadWrite | QIODevice::Text);
+                        fp1.write(_h.c_str());
+                        fp1.close();
+                        emit BroadcastCreated(1);
+                        close();
+                    }
+                };
+                std::thread Class(a);
+                if(Class.joinable())
+                    Class.join();
             }
             else
             {
@@ -141,14 +148,20 @@ void NewFile::OkBtnClicked()
     }
     else if(FileSize == CPP)
     {
-        QString CPPName = Cppfile->CppNameLine->text();
-        QString Path = Cppfile->PathNameLine->text();
-        QFile file(Path + "/" + CPPName);
-        file.open(QIODevice::ReadWrite | QIODevice::Text);
-        string _cpp = "#include <iostream>\nint main\n{\n   return 0;\n}\n";
-        file.write(_cpp.c_str());
-        //file.close();
-        close();
+             auto b = [&]()->void{
+                    QString CPPName = Cppfile->CppNameLine->text();
+                    QString Path = Cppfile->PathNameLine->text();
+                    QFile file(Path + "/" + CPPName);
+                    file.open(QIODevice::ReadWrite | QIODevice::Text);
+                    string _cpp = "#include <iostream>\nint main\n{\n   return 0;\n}\n";
+                    file.write(_cpp.c_str());
+                    //file.close();
+                    emit BroadcastCreated(1);
+                    close();
+                };
+             std::thread Cpp(b);
+             if(Cpp.joinable())
+                 Cpp.join();
     }
     else if(FileSize == HEADER)
     {
@@ -161,10 +174,12 @@ void NewFile::OkBtnClicked()
         string _h = Header.toStdString();
         file.write(_h.c_str());
         file.close();
+        emit BroadcastCreated(1);
         close();
     }
     else if(FileSize == OTHER)
     {
+        emit BroadcastCreated(1);
         QString OtherName = Otherfile->OtherNameLine->text();
         QString Path = Otherfile->PathNameLine->text();
         QFile file(Path + "/" + OtherName);

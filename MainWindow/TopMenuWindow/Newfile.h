@@ -2,6 +2,8 @@
 #define NEWFILE_H
 
 #include <QDir>
+#include <mutex>
+#include <thread>
 #include <cstdio>
 #include <QLabel>
 #include <QWidget>
@@ -20,6 +22,14 @@ class ClassFile;
 class CppFile;
 class HeaderFile;
 class OtherFile;
+/*
+ *
+ *  CopyRight (C) 2021.11.03
+ *  @author:handsomerenbin
+ *  @version: 1.01
+ *  add something about more size
+ *
+*/
 
 typedef enum SelectFile
 {
@@ -37,7 +47,12 @@ public:
     QPushButton* GetOkBtn() const;
     QPushButton* GetCancelBtn() const;
     static int FileSize;
+    void OTHERFuction();
+    void HEADERFuction();
+    void CPPFuction();
+    void CLASSFuction();
 private:
+    std::mutex File;
     QHBoxLayout* MainLayout;
     QListWidget* NewFileList;
     QListWidgetItem* ClassFileItem;
@@ -58,7 +73,7 @@ public slots:
     void OkBtnClicked();
     void CancelBtnClicked();
 signals:
-
+    void BroadcastCreated(int);
 };
 
 class ClassFile : public QWidget
